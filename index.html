@@ -9,8 +9,6 @@ permalink: "/"
     <title>SH Danışmanlık | STK, Dernek ve Vakıf Kurulum Hizmetleri</title>
     <meta name="description" content="SH Danışmanlık; dernek ve vakıf kurulumu, tüzük hazırlama ve mali danışmanlık alanlarında profesyonel çözümler sunar.">
     <link rel="canonical" href="https://shdanismanlik.com/">
-
-    <!-- LCP Preload -->
     <link rel="preload" fetchpriority="high" as="image" href="/img/banner1.webp" type="image/webp">
     <!-- Poppins Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +17,6 @@ permalink: "/"
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 
-    <!-- SPECULATION RULES -->
     <script type="speculationrules">
     {
       "prerender": [
@@ -30,12 +27,7 @@ permalink: "/"
       ]
     }
     </script>
-<script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <!-- ============================================================
-         INLINE KRİTİK CSS — tüm render-blocking CSS burada
-         ============================================================ -->
     <style>
-    /* ========== RESET & VARIABLES ========== */
     :root {
       --primary-color: #0d6efd;
       --primary-hover: #0b5ed7;
@@ -909,10 +901,11 @@ permalink: "/"
   </div>
   <div class="wa-label">Size Nasıl Yardımcı Olabiliriz?</div>
 </a>
+<script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
 <script defer>
 (function(){
-
+  // --- SLIDER ---
   var slides = document.querySelectorAll('.slide');
   var dotsContainer = document.getElementById('sliderDots');
   var current = 0;
@@ -975,6 +968,7 @@ permalink: "/"
     });
   });
 
+  // FAQ Load More
   var loadMoreBtn = document.getElementById('loadMoreFaq');
   if(loadMoreBtn){
     loadMoreBtn.addEventListener('click', function(){
@@ -984,6 +978,8 @@ permalink: "/"
       loadMoreBtn.style.display = 'none';
     });
   }
+
+  // --- MOBILE NAV (style.css sistemiyle uyumlu: active + mob-open) ---
   var navOpenBtn = document.getElementById('navOpenBtn');
   var navCloseBtn = document.getElementById('navCloseBtn');
   var mainNav = document.getElementById('mainNav');
@@ -1006,6 +1002,8 @@ permalink: "/"
   navOpenBtn.addEventListener('click', openNav);
   navCloseBtn.addEventListener('click', closeNav);
   navOverlay.addEventListener('click', closeNav);
+
+  // Mobile dropdown toggle — mob-open sistemi
   document.querySelectorAll('.main-nav .dropdown > a').forEach(function(link){
     link.addEventListener('click', function(e){
       if (window.innerWidth <= 992) {
