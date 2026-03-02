@@ -4,7 +4,7 @@ title: "İletişim"
 description: "Dernek ve vakıf kurulumu, genel kurul yönetimi ve mali danışmanlık süreçleriniz için SH Danışmanlık ile iletişime geçin. Uzman ekibimizle yanınızdayız."
 excerpt: "Sivil toplum hedeflerinizi birlikte gerçekleştirelim. Uzmanlarımız size bir adım uzaklıkta."
 banner_image: "/img/banner2.webp"
-permalink: "/iletisim.html"
+permalink: "/iletisim/"
 
 # === İLETİŞİM BİLGİLERİ ===
 contact_address: "İstiklal Mahallesi Sütçüimam Caddesi No:144 K:3 D:5, Ümraniye, İstanbul"
@@ -16,7 +16,6 @@ contact_hours: "Hafta içi: 09:00 - 18:00 | Cumartesi: Randevu ile"
 # === FORM AYARLARI ===
 form_title: "Danışmanlık Talep Formu"
 form_subtitle: "Hizmetlerimiz hakkında detaylı bilgi ve teklif almak için formu doldurun."
-form_action: "#"
 
 # === HARİTA ===
 map_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.8251!2d29.1219!3d41.0232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac6d4f7b8f7a5%3A0x1234567890abcdef!2zxLBzdGlrbGFsIE1haCwgU8O8dMOnw7xpbWFtIENkLiBObzoxNDQsIMOcbXJhbml5ZS_EsHN0YW5idWw!5e0!3m2!1str!2str!4v1234567890123!5m2!1str!2str"
@@ -167,16 +166,14 @@ map_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.8251!
                 </div>
             </div>
 
-           <!-- SAĞ SÜTUN: İLETİŞİM FORMU -->
+            <!-- SAĞ SÜTUN: İLETİŞİM FORMU -->
             <div class="contact-form-side">
                 <h2>{{ form_title }}</h2>
                 <p style="margin-bottom: 25px; color: #666;">{{ form_subtitle }}</p>
 
-                <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                    <!-- Web3Forms -->
+                <form class="contact-form" id="contactForm">
                     <input type="hidden" name="access_key" value="4fe328a0-e03e-4479-85cf-b2b076f4335b">
                     <input type="hidden" name="subject" value="Yeni Danışmanlık Talebi - SH Danışmanlık">
-                    <input type="hidden" name="redirect" value="https://stkdanisman.netlify.app/tesekkurler/">
 
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Adınız Soyadınız *" required>
@@ -203,11 +200,41 @@ map_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.8251!
                     <div class="form-group">
                         <textarea name="message" placeholder="Mesajınız... *" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%;">
                         <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>
                         Mesajı Gönder
                     </button>
                 </form>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Gönderiliyor...';
+    btn.disabled = true;
+
+    const formData = new FormData(this);
+    const object = Object.fromEntries(formData);
+
+    try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(object)
+        });
+        const result = await response.json();
+        if (result.success) {
+            window.location.href = '/tesekkurler/';
+        } else {
+            throw new Error('Hata');
+        }
+    } catch (error) {
+        btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:8px;"></i> Mesajı Gönder';
+        btn.disabled = false;
+        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+    }
+});
+</script>
             </div>
 
         </div>
