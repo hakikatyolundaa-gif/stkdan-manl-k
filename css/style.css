@@ -1,3 +1,4 @@
+<link rel="preload" href="/css/style.css" as="style">
 :root {
     --primary-color: #0d6efd;
     --dark-color: #1a1a1a;
@@ -1052,3 +1053,4 @@ p, h1, h2, h3, h4, h5, h6, a, li {
   font-display: swap;
   src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2') format('woff2');
 }
+
